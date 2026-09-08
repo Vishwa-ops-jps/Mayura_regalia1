@@ -1,0 +1,255 @@
+.product-details-page {
+  padding: 2rem 0;
+}
+
+.product-details-page.loading,
+.product-details-page.error {
+  text-align: center;
+  padding: 3rem;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-details-page.loading {
+  font-size: 1.2rem;
+  color: var(--light-text);
+}
+
+.product-details-page.error {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-details-page.error h2 {
+  color: #dc3545;
+}
+
+.product-details-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.product-image-section {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--accent-color);
+  aspect-ratio: 1;
+  box-shadow: var(--shadow);
+}
+
+.product-image-large {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discount-badge-large {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.product-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-details-section .product-name {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 1.5px;
+  color: var(--primary-color);
+}
+
+.rating-value {
+  color: var(--light-text);
+}
+
+.product-pricing-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.price-large {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.original-price-large {
+  font-size: 1.2rem;
+  text-decoration: line-through;
+  color: var(--light-text);
+}
+
+.discount-large {
+  background-color: #28a745;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.product-meta {
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: var(--text-color);
+  min-width: 120px;
+}
+
+.meta-value {
+  color: var(--light-text);
+}
+
+.meta-value.in-stock {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.meta-value.out-of-stock {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.product-description {
+  background-color: var(--accent-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.product-description h3 {
+  margin-top: 0;
+}
+
+.product-description p {
+  color: var(--light-text);
+  line-height: 1.7;
+}
+
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantity-section label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons .btn {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .product-details-container {
+    gap: 2rem;
+  }
+
+  .product-details-section .product-name {
+    font-size: 1.5rem;
+  }
+
+  .price-large {
+    font-size: 1.5rem;
+  }
+
+  .original-price-large {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-details-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .product-details-section .product-name {
+    font-size: 1.3rem;
+  }
+
+  .price-large {
+    font-size: 1.3rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details-page {
+    padding: 1rem 0;
+  }
+
+  .product-details-section .product-name {
+    font-size: 1.1rem;
+  }
+
+  .price-large {
+    font-size: 1.2rem;
+  }
+
+  .product-description {
+    padding: 1rem;
+  }
+
+  .product-description h3 {
+    font-size: 1.05rem;
+  }
+
+  .meta-label {
+    min-width: 100px;
+  }
+}

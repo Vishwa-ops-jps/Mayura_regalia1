@@ -1,0 +1,25 @@
+{
+  "short_name": "Mayura Regalia",
+  "name": "Mayura Regalia - Premium Artificial Jewellery",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#5b2a6e",
+  "background_color": "#f8f5f0"
+}
