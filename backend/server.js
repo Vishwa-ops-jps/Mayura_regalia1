@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { initializeDatabase } = require('./config/db');
@@ -20,6 +21,13 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+
+const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'build');
+app.use(express.static(frontendBuildPath));
+
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(frontendBuildPath, 'index.html'));
+});
 
 app.use((err, req, res, next) => {
   console.error(err);
