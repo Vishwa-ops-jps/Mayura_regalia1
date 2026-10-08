@@ -1,32 +1,9 @@
 import React from 'react';
 import '../styles/FilterBar.css';
 
-const FilterBar = ({
-  selectedCategory,
-  selectedSort,
-  onCategoryChange,
-  onSortChange,
-  categories,
-}) => {
+const FilterBar = ({ selectedSort, onSortChange }) => {
   return (
     <div className="filter-bar">
-      <div className="filter-group">
-        <label htmlFor="category">Category:</label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={(e) => onCategoryChange(e.target.value)}
-          className="filter-select"
-        >
-          <option value="">All</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <div className="filter-group">
         <label htmlFor="sort">Sort:</label>
         <select

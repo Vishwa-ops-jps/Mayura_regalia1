@@ -1,0 +1,11 @@
+const express = require('express');
+const controller = require('../controllers/orderController');
+const { requireAdmin, attachCustomerIfPresent } = require('../middleware/auth');
+const router = express.Router();
+router.get('/', requireAdmin, controller.listOrders);
+router.get('/number/:orderNumber', controller.getOrderByNumber);
+router.get('/:id', requireAdmin, controller.getOrder);
+router.post('/', attachCustomerIfPresent, controller.createOrder);
+router.put('/:id/status', requireAdmin, controller.updateOrderStatus);
+router.delete('/:id', requireAdmin, controller.deleteOrder);
+module.exports = router;

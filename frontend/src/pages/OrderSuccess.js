@@ -110,6 +110,8 @@ const OrderSuccess = () => {
                 <p>
                   {order.paymentMethod === 'cod'
                     ? 'Cash on Delivery'
+                    : order.paymentMethod === 'directUpi'
+                    ? 'Pay via UPI'
                     : 'Online Payment'}
                 </p>
               </div>
@@ -118,7 +120,7 @@ const OrderSuccess = () => {
             <div className="success-message">
               <p>Your order has been placed successfully!</p>
               <p>
-                You will receive an email confirmation shortly with tracking details.
+                You will receive an email confirmation shortly. You can also <Link to="/track-order">track your order</Link> any time with your order number.
               </p>
             </div>
           </>

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import storeInfo from '../data/storeInfo';
 import '../styles/Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="contact-us">
       <div className="footer-container">
         <div className="footer-section">
           <Link to="/" className="footer-brand" aria-label="Mayura Regalia home"><img src="/LOGO_Mayura_Regalia.png" alt="Mayura Regalia" className="footer-logo" /></Link>
@@ -36,35 +37,37 @@ const Footer = () => {
           <h4>Customer Care</h4>
           <ul>
             <li>
-              <a href="tel:8951084668">Call us: 8951084668</a>
+              <a href={`tel:${storeInfo.phone}`}>Call us: {storeInfo.phone}</a>
             </li>
             <li>
-              <a href="/">Shipping</a>
+              <Link to="/track-order">Track Your Order</Link>
+            </li>
+            {storeInfo.googleBusiness && (
+              <li>
+                <a href={storeInfo.googleBusiness} target="_blank" rel="noopener noreferrer">Find us on Google</a>
+              </li>
+            )}
+            <li>
+              <Link to="/contact">Contact Us</Link>
             </li>
             <li>
-              <a href="/">Returns</a>
+              <Link to="/shipping-policy">Shipping &amp; Delivery</Link>
             </li>
             <li>
-              <a href="/">FAQ</a>
+              <Link to="/returns-policy">Returns &amp; Refunds</Link>
+            </li>
+            <li>
+              <Link to="/#faq">FAQ</Link>
             </li>
           </ul>
-        </div>
-
-        <div className="footer-section">
-          <h4>Follow Us</h4>
-          <div className="social-links">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              Instagram
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              Facebook
-            </a>
-          </div>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2026 MAYURA REGALIA. All Rights Reserved.</p>
+        <p className="footer-legal-links">
+          <Link to="/privacy-policy">Privacy Policy</Link> · <Link to="/terms-and-conditions">Terms &amp; Conditions</Link> · <Link to="/shipping-policy">Shipping</Link> · <Link to="/returns-policy">Returns</Link>
+        </p>
+        <p>&copy; 2026 MAYURA REGALIA. All Rights Reserved.{storeInfo.gstin ? ` GSTIN: ${storeInfo.gstin}` : ''}</p>
       </div>
     </footer>
   );

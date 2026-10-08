@@ -23,7 +23,7 @@
 .form-group label { display: block; font-weight: 600; margin-bottom: .45rem; font-size: .86rem; }
 .form-group input, .form-group textarea {
   width: 100%; padding: .82rem .9rem; border: 1px solid #dcd2c6; border-radius: 2px;
-  font-size: .94rem; font-family: inherit; background: #fffdf9; transition: border-color .2s, box-shadow .2s;
+  font-size: .94rem; font-family: inherit; background: #FFFFFF; transition: border-color .2s, box-shadow .2s;
 }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(201,162,39,.12); background: #fff; }
 .form-group input.error, .form-group textarea.error { border-color: #c0392b; }
@@ -32,11 +32,32 @@
 .payment-options { display: grid; gap: .7rem; }
 .payment-option {
   display: flex; align-items: center; gap: .75rem; cursor: pointer; padding: 1rem;
-  border: 1px solid var(--border-color); background: #fffdf9; border-radius: 2px; transition: border-color .2s, background .2s;
+  border: 1px solid var(--border-color); background: #FFFFFF; border-radius: 2px; transition: border-color .2s, background .2s;
 }
-.payment-option:hover { border-color: var(--primary-color); background: #fffaf0; }
+.payment-option:hover { border-color: var(--primary-color); background: #FFFFFF; }
 .payment-option input { width: auto; margin: 0; cursor: pointer; }
 .payment-option span { font-weight: 600; font-size: .88rem; }
+.payment-option.disabled { opacity: .55; cursor: not-allowed; }
+.payment-option.disabled:hover { border-color: inherit; background: none; }
+.payment-option.disabled input { cursor: not-allowed; }
+.payment-option-note { font-weight: 400; font-style: normal; color: #9a2f2f; font-size: .78rem; }
+.payment-upi-note { font-size: .8rem; color: #5b2a6e; margin: -.2rem 0 0; padding-left: .2rem; }
+
+.direct-upi-panel { padding-top: 3rem; padding-bottom: 3rem; }
+.upi-qr-box { display: inline-flex; padding: 1rem; background: #fff; border: 1px solid var(--border-color); border-radius: 10px; margin: 1rem 0; }
+.upi-id-line { font-size: .85rem; color: var(--text-color); margin-bottom: 1.2rem !important; }
+.direct-upi-panel .btn { display: inline-block; margin-bottom: 1.6rem; }
+.utr-form { display: flex; flex-direction: column; gap: .5rem; max-width: 320px; margin: 0 auto 1rem; text-align: left; }
+.utr-form label { font-size: .78rem; font-weight: 600; color: var(--text-color); }
+.utr-form input { padding: .7rem .9rem; border: 1px solid var(--border-color); border-radius: 6px; font-size: .88rem; }
+.utr-form .btn { margin: .3rem 0 0; width: 100%; }
+.link-btn { background: none; border: 0; color: var(--primary-color-dark); font-size: .8rem; text-decoration: underline; cursor: pointer; margin-bottom: 1rem; }
+.upi-manual-note { font-size: .74rem !important; color: var(--light-text); max-width: 340px; margin: 0 auto !important; }
+
+.proof-upload-label { margin-top: .4rem; }
+.utr-form input[type="file"] { padding: .5rem; border: 1px dashed var(--border-color); border-radius: 6px; font-size: .8rem; }
+.proof-preview { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.proof-preview img { max-width: 160px; max-height: 160px; border-radius: 6px; border: 1px solid var(--border-color); object-fit: cover; }
 .checkout-form .btn-full { padding: 1.05rem; font-size: .9rem; letter-spacing: 1px; margin-top: .75rem; }
 
 .checkout-summary { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
@@ -65,7 +86,7 @@
 .saved-for-later { margin-top: 1rem; padding-top: .9rem; border-top: 1px dashed var(--border-color); }
 .saved-for-later h3 { font-size: .82rem; color: var(--light-text); margin-bottom: .7rem; }
 .saved-for-later .bag-item { margin-bottom: .7rem; }
-.coupon-box { display: flex; align-items: center; gap: .45rem; margin-top: 1rem; padding: .55rem .65rem; border: 1px dashed var(--primary-color); border-radius: 2px; background: #fffdf7; }
+.coupon-box { display: flex; align-items: center; gap: .45rem; margin-top: 1rem; padding: .55rem .65rem; border: 1px dashed var(--primary-color); border-radius: 2px; background: #FFFFFF; }
 .coupon-icon { flex-shrink: 0; }
 .coupon-box input { flex: 1; border: 0; background: none; outline: none; font-size: .78rem; min-width: 0; }
 .coupon-box button { border: 0; background: var(--secondary-color); color: #fff; padding: .42rem .75rem; border-radius: 2px; font-size: .74rem; font-weight: 700; cursor: pointer; }

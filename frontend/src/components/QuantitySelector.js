@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/QuantitySelector.css';
 
-const QuantitySelector = ({ quantity, onQuantityChange, maxStock = 10 }) => {
+const QuantitySelector = ({ quantity, onQuantityChange, maxStock = 10, disabled = false }) => {
   return (
     <div className="quantity-selector">
       <button
         className="qty-btn"
         onClick={() => quantity > 1 && onQuantityChange(quantity - 1)}
-        disabled={quantity <= 1}
+        disabled={disabled || quantity <= 1}
       >
         −
       </button>
@@ -15,8 +15,9 @@ const QuantitySelector = ({ quantity, onQuantityChange, maxStock = 10 }) => {
         type="number"
         className="qty-input"
         value={quantity}
+        disabled={disabled}
         onChange={(e) => {
-          const val = parseInt(e.target.value);
+          const val = parseInt(e.target.value, 10);
           if (val > 0 && val <= maxStock) {
             onQuantityChange(val);
           }
@@ -27,7 +28,7 @@ const QuantitySelector = ({ quantity, onQuantityChange, maxStock = 10 }) => {
       <button
         className="qty-btn"
         onClick={() => quantity < maxStock && onQuantityChange(quantity + 1)}
-        disabled={quantity >= maxStock}
+        disabled={disabled || quantity >= maxStock}
       >
         +
       </button>

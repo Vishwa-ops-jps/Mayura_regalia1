@@ -1,0 +1,212 @@
+.reel-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reel-track {
+  --slide-w: clamp(210px, 26vw, 300px);
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-left: 0;
+  padding: 0.5rem 1rem 1.5rem 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.reel-track::-webkit-scrollbar { display: none; }
+
+.reel-slide {
+  flex: 0 0 auto;
+  width: var(--slide-w);
+  aspect-ratio: 9 / 16;
+  scroll-snap-align: start;
+  opacity: 0.55;
+  transform: scale(0.92);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.reel-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reel-slide-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  background: #1a1210;
+  box-shadow: 0 18px 40px rgba(43, 35, 32, 0.22);
+}
+
+.reel-slide-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-slide-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15, 9, 8, 0.55) 0%, rgba(15, 9, 8, 0.02) 22%, rgba(15, 9, 8, 0.05) 55%, rgba(15, 9, 8, 0.85) 100%);
+}
+
+.reel-slide-top {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reel-brand {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.reel-icon-btn {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(20, 12, 15, 0.5);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+  transition: background 0.2s ease;
+}
+.reel-icon-btn:hover { background: rgba(20, 12, 15, 0.72); }
+.reel-icon-btn svg { width: 15px; height: 15px; }
+
+.reel-slide-copy {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 4.2rem;
+  z-index: 2;
+}
+.reel-slide-eyebrow {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #F3C8D3;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+.reel-slide-copy h3 {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: #fff;
+  font-size: 1.3rem;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+.reel-slide-copy h3::after { display: none; }
+
+.reel-slide-chip {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.55rem;
+  background: rgba(20, 12, 15, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  backdrop-filter: blur(6px);
+}
+.reel-chip-thumb {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+.reel-chip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.reel-chip-text {
+  flex: 1;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.reel-chip-arrow { flex-shrink: 0; color: #fff; font-size: 1rem; }
+
+.reel-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #F0D6DE;
+  border-radius: 50%;
+  background: #fff;
+  color: #111111;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(176, 112, 132, 0.18);
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 3;
+}
+.reel-nav:hover { background: #FDE4EE; transform: translateY(-2px); }
+
+.reel-dots {
+  position: absolute;
+  left: 50%;
+  bottom: -0.35rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+.reel-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #E9C5CF;
+  cursor: pointer;
+}
+.reel-dots button.active {
+  width: 24px;
+  border-radius: 8px;
+  background: var(--brand);
+}
+
+@media (max-width: 900px) {
+  .reel-nav { width: 36px; height: 36px; font-size: 1.4rem; }
+}
+
+@media (max-width: 640px) {
+  .reel-carousel { gap: 0.25rem; }
+  .reel-track { --slide-w: min(62vw, 240px); }
+  .reel-nav { width: 32px; height: 32px; font-size: 1.25rem; }
+}

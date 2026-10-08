@@ -6,6 +6,7 @@ import '../styles/CartItem.css';
 
 const CartItem = ({ item }) => {
   const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+  const inStock = item.inStock !== false;
 
   const updateQuantity = (quantity) => {
     if (quantity > item.quantity) increaseQuantity(item.id);
@@ -13,7 +14,7 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <article className="cart-item">
+    <article className={`cart-item ${!inStock ? 'is-out-of-stock' : ''}`}>
       <Link to={`/product/${item.id}`} className="cart-item-image">
         <img
           src={item.image}
@@ -24,9 +25,11 @@ const CartItem = ({ item }) => {
       <div className="cart-item-details">
         <Link to={`/product/${item.id}`} className="cart-item-name">{item.name}</Link>
         <p className="cart-item-category">{item.category}</p>
-        <p className="cart-item-availability">In stock</p>
+        <p className={`cart-item-availability ${inStock ? 'in-stock' : 'out-of-stock'}`}>
+          {inStock ? 'In stock' : 'Out of stock'}
+        </p>
         <div className="cart-item-controls">
-          <QuantitySelector quantity={item.quantity} onQuantityChange={updateQuantity} />
+          <QuantitySelector quantity={item.quantity} onQuantityChange={updateQuantity} disabled={!inStock} />
           <button className="cart-item-text-action" onClick={() => removeFromCart(item.id)}>Delete</button>
         </div>
       </div>

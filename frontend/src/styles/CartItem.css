@@ -32,6 +32,9 @@
 .cart-item-name:hover { color: var(--secondary-color); }
 .cart-item-category { margin: 0.28rem 0; color: var(--light-text); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .cart-item-availability { color: #18733d; font-size: 0.76rem; margin: 0.55rem 0 0.85rem; }
+.cart-item-availability.out-of-stock { color: #dc3545; font-weight: 600; }
+.cart-item.is-out-of-stock { opacity: 0.75; }
+.cart-item.is-out-of-stock .cart-item-image img { filter: grayscale(40%); }
 
 .cart-item-controls { display: flex; align-items: center; gap: 0.85rem; }
 .cart-item-text-action {

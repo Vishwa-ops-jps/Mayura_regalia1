@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 import { apiRequest } from '../../services/api';
+import AdminIcon from '../components/AdminIcon';
 import '../styles/AdminDashboard.css';
 
 const emptyProduct = {
@@ -132,45 +133,47 @@ const AdminDashboard = () => {
   };
 
   const menu = [
-    ['dashboard', '▦', 'Dashboard'],
-    ['products', '◇', 'Products'],
-    ['orders', '▤', 'Orders'],
-    ['customers', '♙', 'Customers'],
-    ['categories', '◈', 'Categories'],
-    ['settings', '⚙', 'Settings'],
+    ['dashboard', 'dashboard', 'Dashboard'],
+    ['products', 'product', 'Products'],
+    ['orders', 'orders', 'Orders'],
+    ['customers', 'customers', 'Customers'],
+    ['categories', 'categories', 'Categories'],
+    ['settings', 'settings', 'Settings'],
   ];
 
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-brand">
-          <img src="/LOGO_Mayura_Regalia.png" alt="Mayura Regalia" />
+          <div className="admin-logo-frame">
+            <img src="/LOGO_Mayura_Regalia.png" alt="Mayura Regalia" />
+          </div>
           <span>ADMIN PANEL</span>
         </div>
         <nav>
           {menu.map(([key, icon, label]) => (
             <button key={key} className={active === key ? 'active' : ''} onClick={() => setActive(key)}>
-              <span>{icon}</span>{label}
+              <AdminIcon name={icon} size={17} />{label}
             </button>
           ))}
         </nav>
-        <button className="admin-logout" onClick={logout}>↪ Logout</button>
+        <button className="admin-logout" onClick={logout}><AdminIcon name="returns" size={17} /> Logout</button>
       </aside>
 
       <main className="admin-main">
         <header className="admin-topbar">
-          <div>
-            <span className="admin-mobile-label">MAYURA REGALIA</span>
+          <div className="admin-topbar-title">
+            <span className="admin-mobile-label"><img src="/LOGO_Mayura_Regalia.png" alt="" /> MAYURA REGALIA</span>
             <h1>{active === 'dashboard' ? 'Dashboard Overview' : active[0].toUpperCase() + active.slice(1)}</h1>
           </div>
           <div className="admin-profile">
-            <span className="notification-dot">♧</span>
+            <span className="notification-dot"><AdminIcon name="success" size={15} /></span>
             <div className="avatar">M</div>
             <div><strong>{admin?.name || 'Admin'}</strong><small>Administrator</small></div>
           </div>
         </header>
 
-        {message && <div className="admin-success">✓ {message}</div>}
+        {message && <div className="admin-success"><AdminIcon name="success" size={16} /> {message}</div>}
         {error && !modalOpen && <div className="admin-error">{error}</div>}
 
         {active === 'dashboard' && (
@@ -180,7 +183,7 @@ const AdminDashboard = () => {
               <div className="stat-card"><span>In Stock</span><strong>{inStockCount}</strong><em>Ready to sell</em></div>
               <div className="stat-card"><span>Out of Stock</span><strong>{lowStock}</strong><em>Needs attention</em></div>
               <div className="stat-card"><span>Categories</span><strong>{categories.length}</strong><em>Product collections</em></div>
-              <div className="stat-card"><span>Average Rating</span><strong>★ {averageRating}</strong><em>Customer rating</em></div>
+              <div className="stat-card"><span>Average Rating</span><strong><AdminIcon name="rating" size={16} /> {averageRating}</strong><em>Customer rating</em></div>
               <div className="stat-card"><span>Average Price</span><strong>{formatCurrency(averagePrice)}</strong><em>Per product</em></div>
               <div className="stat-card"><span>Inventory Value</span><strong>{formatCurrency(inventoryValue)}</strong><em>In-stock total</em></div>
             </div>
@@ -203,9 +206,9 @@ const AdminDashboard = () => {
               </div>
               <div className="admin-panel-card quick-card">
                 <div className="panel-heading"><div><span>QUICK ACTIONS</span><h2>Store controls</h2></div></div>
-                <button onClick={openAdd}>＋ Add New Product</button>
-                <button onClick={() => setActive('products')}>◇ Edit Catalogue</button>
-                <button onClick={() => setActive('categories')}>◈ View Categories</button>
+                <button onClick={openAdd}><AdminIcon name="add" size={16} /> Add New Product</button>
+                <button onClick={() => setActive('products')}><AdminIcon name="product" size={16} /> Edit Catalogue</button>
+                <button onClick={() => setActive('categories')}><AdminIcon name="categories" size={16} /> View Categories</button>
               </div>
             </div>
 
@@ -219,8 +222,8 @@ const AdminDashboard = () => {
         {active === 'products' && (
           <section>
             <div className="product-toolbar">
-              <div className="admin-search"><span>⌕</span><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." /></div>
-              <button className="add-product-btn" onClick={openAdd}>＋ Add Product</button>
+              <div className="admin-search"><AdminIcon name="search" size={16} /><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products..." /></div>
+              <button className="add-product-btn" onClick={openAdd}><AdminIcon name="add" size={16} /> Add Product</button>
             </div>
             <div className="admin-panel-card table-card">
               <div className="panel-heading"><div><span>CATALOGUE</span><h2>{filteredProducts.length} products</h2></div><small>Changes are saved directly to MySQL</small></div>
@@ -272,7 +275,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => (
             <td><div className="table-product"><img src={p.image} alt="" /><div><strong>{p.name}</strong><small>#{String(p.id).padStart(4, '0')}</small></div></div></td>
             <td>{p.category}</td><td>{formatCurrency(p.price)}</td>
             <td><span className={`stock-pill ${p.inStock ? 'in' : 'out'}`}>{p.inStock ? 'Active' : 'Out of stock'}</span></td>
-            <td>★ {Number(p.rating).toFixed(1)}</td>
+            <td><AdminIcon name="rating" size={14} /> {Number(p.rating).toFixed(1)}</td>
             <td><button className="table-action edit" onClick={() => onEdit(p)}>Edit</button><button className="table-action delete" onClick={() => onDelete(p)}>Delete</button></td>
           </tr>
         ))}

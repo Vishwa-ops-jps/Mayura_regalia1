@@ -1,0 +1,10 @@
+const express = require('express');
+const controller = require('../controllers/reviewController');
+const { requireAdmin } = require('../middleware/auth');
+const router = express.Router();
+router.get('/', controller.list);
+router.post('/', controller.create);
+router.put('/:id/status', requireAdmin, controller.updateStatus);
+router.put('/:id', requireAdmin, controller.update);
+router.delete('/:id', requireAdmin, controller.remove);
+module.exports = router;

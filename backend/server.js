@@ -7,24 +7,85 @@ const { findByEmail, createAdmin } = require('./models/adminModel');
 const bcrypt = require('bcryptjs');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const collectionRoutes = require('./routes/collectionRoutes');
+const bannerRoutes = require('./routes/bannerRoutes');
+const giftRoutes = require('./routes/giftRoutes');
+const couponRoutes = require('./routes/couponRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const customerRoutes = require('./routes/customerRoutes');
+const customerAuthRoutes = require('./routes/customerAuthRoutes');
+const wishlistRoutes = require('./routes/wishlistRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+const inventoryRoutes = require('./routes/inventoryRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const settingRoutes = require('./routes/settingRoutes');
+const returnRoutes = require('./routes/returnRoutes');
 const { seedProducts } = require('./utils/seedProducts');
+const { seedAdminExtras } = require('./utils/seedAdminExtras');
 
 const app = express();
 const PORT = Number(process.env.PORT || 5000);
 
+// Security headers + login rate limiting. Both packages are in package.json; if they are not
+// installed yet (npm install not run) the server still starts and just logs a warning.
+try {
+  const helmet = require('helmet');
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+} catch (e) {
+  console.warn('helmet not installed - run "npm install" in backend for security headers');
+}
+try {
+  const rateLimit = require('express-rate-limit');
+  const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 30,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: 'Too many attempts. Please wait 15 minutes and try again.' },
+  });
+  app.use('/api/auth/login', loginLimiter);
+  app.use('/api/customer-auth', loginLimiter);
+  app.use('/api/orders/track', loginLimiter);
+} catch (e) {
+  console.warn('express-rate-limit not installed - run "npm install" in backend for login rate limiting');
+}
+
 app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
-app.use(express.json());
+// Raised from Express's 100kb default: images (product photos, payment
+// screenshots) are uploaded as base64 data URLs in the JSON body.
+app.use(express.json({ limit: '10mb' }));
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'MAYURA REGALIA API' });
 });
 
+app.use(require('./routes/seoRoutes'));
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/collections', collectionRoutes);
+app.use('/api/banners', bannerRoutes);
+app.use('/api/gifts', giftRoutes);
+app.use('/api/coupons', couponRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/customers', customerRoutes);
+app.use('/api/customer-auth', customerAuthRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/settings', settingRoutes);
+app.use('/api/returns', returnRoutes);
 
+// Serve the built React app (storefront + /admin) so this one backend
+// service can also host the frontend on Render/Railway/etc. If you deploy
+// the frontend as its own static site instead, this block is harmless -
+// it only kicks in when frontend/build actually exists.
 const frontendBuildPath = path.join(__dirname, '..', 'frontend', 'build');
 app.use(express.static(frontendBuildPath));
-
 app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(frontendBuildPath, 'index.html'));
 });
@@ -51,6 +112,7 @@ async function ensureAdmin() {
     await ensureAdmin();
     const seeded = await seedProducts();
     if (seeded) console.log('Seeded initial MAYURA REGALIA products into MySQL');
+    await seedAdminExtras();
     app.listen(PORT, () => console.log(`MAYURA REGALIA API running on http://localhost:${PORT}`));
   } catch (error) {
     console.error('Startup failed:', error.message);

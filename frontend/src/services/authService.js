@@ -36,6 +36,29 @@ const authService = {
     }
   },
 
+  // Asks the server whether the saved admin token is still accepted.
+  async verify() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) return false;
+    try {
+      const response = await fetch(`${API_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.status === 401 || response.status === 403) return false;
+      return true; // network/server errors should not log the admin out
+    } catch {
+      return true;
+    }
+  },
+
+  // Clears a dead token and sends the admin back to the login page.
+  handleExpired() {
+    this.logout();
+    if (!window.location.pathname.startsWith('/admin/login')) {
+      window.location.replace('/admin/login?expired=1');
+    }
+  },
+
   isAuthenticated() {
     return Boolean(localStorage.getItem(TOKEN_KEY));
   },

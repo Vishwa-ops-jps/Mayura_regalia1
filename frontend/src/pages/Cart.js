@@ -10,6 +10,7 @@ const Cart = () => {
   const subtotal = getCartTotal();
   const shipping = subtotal > 999 ? 0 : 100;
   const discount = 0;
+  const hasOutOfStockItem = cart.some((item) => item.inStock === false);
 
   if (cart.length === 0) {
     return (
@@ -61,9 +62,20 @@ const Cart = () => {
             </div>
             <h2>Subtotal ({cart.length} {cart.length === 1 ? 'item' : 'items'}): <strong>&#8377;{subtotal}</strong></h2>
             <CartSummary subtotal={subtotal} shipping={shipping} discount={discount} />
-            <Link to="/checkout" className="btn btn-primary btn-full checkout-button">
-              <span>Proceed to Buy</span>
-            </Link>
+            {hasOutOfStockItem ? (
+              <>
+                <button type="button" className="btn btn-primary btn-full checkout-button" disabled>
+                  <span>Proceed to Buy</span>
+                </button>
+                <p className="cart-stock-warning">
+                  Remove out-of-stock items from your cart to proceed to checkout.
+                </p>
+              </>
+            ) : (
+              <Link to="/checkout" className="btn btn-primary btn-full checkout-button">
+                <span>Proceed to Buy</span>
+              </Link>
+            )}
           </div>
         </aside>
       </div>

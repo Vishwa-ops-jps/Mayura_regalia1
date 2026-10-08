@@ -121,6 +121,8 @@
   letter-spacing: 0;
 }
 .checkout-button:hover { background: #bd941f; box-shadow: none; transform: none; }
+.checkout-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.cart-stock-warning { margin-top: 0.6rem; color: #dc3545; font-size: 0.8rem; text-align: center; }
 
 @media (max-width: 1024px) {
   .cart-container { grid-template-columns: 1fr; }
