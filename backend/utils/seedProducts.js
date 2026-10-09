@@ -1,7 +1,8 @@
+// Auto-generated from frontend/src/data/products.js
 const products = [
   {
     "id": 1,
-    "name": "Kundan Necklace",
+    "name": "Royal Kundan Necklace",
     "category": "Necklaces",
     "price": 2499,
     "originalPrice": 4999,
@@ -136,7 +137,7 @@ const products = [
     "material": "Premium Alloy",
     "color": "Blue & Gold",
     "inStock": true,
-    "description": "Elegant sapphire pendant on a delicate chain. A sophisticated addition to any jewellery collection.",
+    "description": "Elegant sapphire pendant on a delicate chain. A sophisticated addition to any jewelry collection.",
     "image": "/products/regalia-10.jpg"
   },
   {
@@ -146,7 +147,7 @@ const products = [
     "price": 4999,
     "originalPrice": 9999,
     "discount": 50,
-    "rating": 5.0,
+    "rating": 5,
     "material": "Premium Alloy",
     "color": "Multi-Color",
     "inStock": true,
@@ -165,7 +166,7 @@ const products = [
     "color": "Silver",
     "inStock": true,
     "description": "Elegant diamond-look stud earrings that sparkle beautifully. Perfect for everyday wear.",
-    "image": "/products/regalia-2.jpg"
+    "image": "/products/regalia-1.jpg"
   },
   {
     "id": 13,
@@ -179,7 +180,7 @@ const products = [
     "color": "Multi-Color",
     "inStock": true,
     "description": "Traditional meenakari work necklace with vibrant enamel designs.",
-    "image": "/products/regalia-3.jpg"
+    "image": "/products/regalia-2.jpg"
   },
   {
     "id": 14,
@@ -193,7 +194,7 @@ const products = [
     "color": "Gold",
     "inStock": true,
     "description": "Set of temple-inspired bangles with traditional Hindu motifs.",
-    "image": "/products/regalia-4.jpg"
+    "image": "/products/regalia-3.jpg"
   },
   {
     "id": 15,
@@ -207,11 +208,11 @@ const products = [
     "color": "Multi-Stone",
     "inStock": true,
     "description": "Set of three statement cocktail rings with colorful stone embellishments.",
-    "image": "/products/regalia-5.jpg"
+    "image": "/products/regalia-4.jpg"
   },
   {
     "id": 16,
-    "name": "Bridal Maang Tikka",
+    "name": "Bridal Tiara",
     "category": "Bridal Jewellery",
     "price": 2999,
     "originalPrice": 5999,
@@ -220,8 +221,8 @@ const products = [
     "material": "Premium Alloy",
     "color": "Gold",
     "inStock": true,
-    "description": "Gorgeous bridal maang tikka that adds sparkle and elegance to your bridal look.",
-    "image": "/products/regalia-6.jpg"
+    "description": "Gorgeous bridal tiara that adds sparkle and elegance to your bridal look.",
+    "image": "/products/regalia-5.jpg"
   },
   {
     "id": 17,
@@ -235,7 +236,7 @@ const products = [
     "color": "Gold",
     "inStock": true,
     "description": "Delicate gold chain bracelet that's perfect for layering or wearing alone.",
-    "image": "/products/regalia-7.jpg"
+    "image": "/products/regalia-6.jpg"
   },
   {
     "id": 18,
@@ -249,7 +250,7 @@ const products = [
     "color": "Gold & Silver",
     "inStock": true,
     "description": "Collection of traditional nose rings in various designs and sizes.",
-    "image": "/products/regalia-8.jpg"
+    "image": "/products/regalia-7.jpg"
   },
   {
     "id": 19,
@@ -263,7 +264,7 @@ const products = [
     "color": "Gold",
     "inStock": true,
     "description": "Bold statement bangle bracelet with modern artistic design.",
-    "image": "/products/regalia-9.jpg"
+    "image": "/products/regalia-8.jpg"
   },
   {
     "id": 20,
@@ -277,7 +278,567 @@ const products = [
     "color": "Gold",
     "inStock": true,
     "description": "Traditional bridal armlet set with intricate stone work and traditional patterns.",
-    "image": "/products/regalia-10.jpg"
+    "image": "/products/regalia-9.jpg"
+  },
+  {
+    "id": 101,
+    "name": "Mayura Purse 01",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-01.jpg"
+  },
+  {
+    "id": 102,
+    "name": "Mayura Purse 02",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-02.jpg"
+  },
+  {
+    "id": 103,
+    "name": "Mayura Purse 03",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-03.jpg"
+  },
+  {
+    "id": 104,
+    "name": "Mayura Purse 04",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-04.jpg"
+  },
+  {
+    "id": 105,
+    "name": "Mayura Purse 05",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-05.jpg"
+  },
+  {
+    "id": 106,
+    "name": "Mayura Purse 06",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-06.jpg"
+  },
+  {
+    "id": 107,
+    "name": "Mayura Purse 07",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-07.jpg"
+  },
+  {
+    "id": 108,
+    "name": "Mayura Purse 08",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-08.jpg"
+  },
+  {
+    "id": 109,
+    "name": "Mayura Purse 09",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-09.jpg"
+  },
+  {
+    "id": 110,
+    "name": "Mayura Purse 10",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-10.jpg"
+  },
+  {
+    "id": 111,
+    "name": "Mayura Purse 11",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-11.jpg"
+  },
+  {
+    "id": 112,
+    "name": "Mayura Purse 12",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-12.jpg"
+  },
+  {
+    "id": 113,
+    "name": "Mayura Purse 13",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-13.jpg"
+  },
+  {
+    "id": 114,
+    "name": "Mayura Purse 14",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-14.jpg"
+  },
+  {
+    "id": 115,
+    "name": "Mayura Purse 15",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-15.jpg"
+  },
+  {
+    "id": 116,
+    "name": "Mayura Purse 16",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-16.jpg"
+  },
+  {
+    "id": 117,
+    "name": "Mayura Purse 17",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-17.jpg"
+  },
+  {
+    "id": 118,
+    "name": "Mayura Purse 18",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-18.jpg"
+  },
+  {
+    "id": 119,
+    "name": "Mayura Purse 19",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-19.jpg"
+  },
+  {
+    "id": 120,
+    "name": "Mayura Purse 20",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-20.jpg"
+  },
+  {
+    "id": 121,
+    "name": "Mayura Purse 21",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-21.jpg"
+  },
+  {
+    "id": 122,
+    "name": "Mayura Purse 22",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-22.jpg"
+  },
+  {
+    "id": 123,
+    "name": "Mayura Purse 23",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-23.jpg"
+  },
+  {
+    "id": 124,
+    "name": "Mayura Purse 24",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-24.jpg"
+  },
+  {
+    "id": 125,
+    "name": "Mayura Purse 25",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-25.jpg"
+  },
+  {
+    "id": 126,
+    "name": "Mayura Purse 26",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-26.jpg"
+  },
+  {
+    "id": 127,
+    "name": "Mayura Purse 27",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-27.jpg"
+  },
+  {
+    "id": 128,
+    "name": "Mayura Purse 28",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-28.jpg"
+  },
+  {
+    "id": 129,
+    "name": "Mayura Purse 29",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-29.jpg"
+  },
+  {
+    "id": 130,
+    "name": "Mayura Purse 30",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-30.jpg"
+  },
+  {
+    "id": 131,
+    "name": "Mayura Purse 31",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-31.jpg"
+  },
+  {
+    "id": 132,
+    "name": "Mayura Purse 32",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-32.jpg"
+  },
+  {
+    "id": 133,
+    "name": "Mayura Purse 33",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-33.jpg"
+  },
+  {
+    "id": 134,
+    "name": "Mayura Purse 34",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-34.jpg"
+  },
+  {
+    "id": 135,
+    "name": "Mayura Purse 35",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-35.jpg"
+  },
+  {
+    "id": 136,
+    "name": "Mayura Purse 36",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-36.jpg"
+  },
+  {
+    "id": 137,
+    "name": "Mayura Purse 37",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-37.jpg"
+  },
+  {
+    "id": 138,
+    "name": "Mayura Purse 38",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-38.jpg"
+  },
+  {
+    "id": 139,
+    "name": "Mayura Purse 39",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-39.jpg"
+  },
+  {
+    "id": 140,
+    "name": "Mayura Purse 40",
+    "category": "Bags",
+    "price": 1599,
+    "originalPrice": null,
+    "discount": 0,
+    "rating": 0,
+    "material": "",
+    "color": "",
+    "inStock": true,
+    "description": "Purse from the Mayura Regalia bags collection.",
+    "image": "/products/purses/purse-40.jpg"
   },
   {
     "id": 141,
@@ -406,6 +967,60 @@ const products = [
     "image": "/products/saree-wine-velvet.jpg"
   },
   {
+    "id": 150,
+    "name": "Pure 925 Sterling Silver Floral Anklets (Pair)",
+    "category": "Silver",
+    "price": 3499,
+    "originalPrice": 4999,
+    "discount": 30,
+    "rating": 4.9,
+    "material": "925 Sterling Silver",
+    "color": "Silver",
+    "inStock": true,
+    "description": "Handcrafted 925 Sterling Silver traditional floral payal anklet pair with delicate chime bells and high-polish finish. Hallmarked silver guaranteed.",
+    "image": "/products/regalia-7.jpg",
+    "images": [
+      "/products/regalia-7.jpg",
+      "/products/regalia-3.jpg"
+    ]
+  },
+  {
+    "id": 151,
+    "name": "Traditional Oxidised Silver Temple Hasli Necklace",
+    "category": "Silver",
+    "price": 4999,
+    "originalPrice": 6999,
+    "discount": 28,
+    "rating": 4.8,
+    "material": "925 Sterling Silver",
+    "color": "Oxidised Silver",
+    "inStock": true,
+    "description": "Stunning solid 925 oxidised silver hasli collar necklace featuring intricately carved peacock motifs and temple engraving.",
+    "image": "/products/regalia-1.jpg",
+    "images": [
+      "/products/regalia-1.jpg",
+      "/products/regalia-5.jpg"
+    ]
+  },
+  {
+    "id": 152,
+    "name": "Solid Silver Floral Embossed Kada Bangle",
+    "category": "Silver",
+    "price": 2899,
+    "originalPrice": 3999,
+    "discount": 27,
+    "rating": 4.7,
+    "material": "Pure Silver",
+    "color": "Silver",
+    "inStock": true,
+    "description": "Heavy pure silver kada bangle with detailed filigree floral engraving and secure screw clasp mechanism.",
+    "image": "/products/bangles-set-of-4.jpg",
+    "images": [
+      "/products/bangles-set-of-4.jpg",
+      "/products/bangles-gemstone-kada.jpg"
+    ]
+  },
+  {
     "id": 153,
     "name": "German Silver Tribal Statement Choker Set",
     "category": "German Silver",
@@ -417,7 +1032,11 @@ const products = [
     "color": "Antique Silver",
     "inStock": true,
     "description": "Premium handcrafted German Silver choker with delicate hanging ghungroos and matching statement jhumka earrings. Bohemian tribal vintage elegance.",
-    "image": "/products/regalia-9.jpg"
+    "image": "/products/regalia-9.jpg",
+    "images": [
+      "/products/regalia-9.jpg",
+      "/products/regalia-11.jpg"
+    ]
   },
   {
     "id": 154,
@@ -431,7 +1050,11 @@ const products = [
     "color": "Oxidised Silver",
     "inStock": true,
     "description": "Artisanal German Silver peacock jhumka earrings adorned with micro-carved bells and an antique oxidised matte finish.",
-    "image": "/products/earrings-green-jhumka.jpg"
+    "image": "/products/earrings-green-jhumka.jpg",
+    "images": [
+      "/products/earrings-green-jhumka.jpg",
+      "/products/earrings-red-jhumka.jpg"
+    ]
   },
   {
     "id": 155,
@@ -445,25 +1068,39 @@ const products = [
     "color": "Silver",
     "inStock": true,
     "description": "Exquisite multi-strand German Silver necklace with temple coin accents and an intricately sculpted goddess Lakshmi centerpiece.",
-    "image": "/products/fashion-jewels-1.jpg"
+    "image": "/products/fashion-jewels-1.jpg",
+    "images": [
+      "/products/fashion-jewels-1.jpg",
+      "/products/fashion-jewels-2.jpg"
+    ]
   }
 ];
 
 const { getPool } = require('../config/db');
 
 async function seedProducts() {
-  const [countRows] = await getPool().query('SELECT COUNT(*) AS count FROM products');
-  if (Number(countRows[0].count) > 0) return false;
-
-  const sql = `INSERT INTO products
+  const sql = INSERT INTO products
     (id, name, category, price, original_price, discount, rating, material, color, in_stock, description, image, images)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE
+      name = VALUES(name),
+      category = VALUES(category),
+      price = VALUES(price),
+      original_price = VALUES(original_price),
+      discount = VALUES(discount),
+      rating = VALUES(rating),
+      material = VALUES(material),
+      color = VALUES(color),
+      in_stock = VALUES(in_stock),
+      description = VALUES(description),
+      image = VALUES(image),
+      images = VALUES(images);
 
   for (const p of products) {
     const imagesVal = p.images ? JSON.stringify(p.images) : JSON.stringify([p.image]);
     await getPool().query(sql, [
-      p.id, p.name, p.category, p.price, p.originalPrice, p.discount, p.rating,
-      p.material, p.color, p.inStock ? 1 : 0, p.description, p.image, imagesVal,
+      p.id, p.name, p.category, p.price, p.originalPrice || null, p.discount || 0, p.rating || 4.5,
+      p.material || 'Premium Alloy', p.color || 'Gold', p.inStock ? 1 : 0, p.description || '', p.image, imagesVal,
     ]);
   }
   return true;
