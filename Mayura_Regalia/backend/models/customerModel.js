@@ -84,23 +84,26 @@ async function findByPhone(phone) {
 // already exists for this phone (e.g. created earlier via guest checkout or
 // the admin panel) and has no password yet, it "claims" that record instead
 // of creating a duplicate, so their existing order history stays linked.
-async function findOrCreateForSignup({ name, phone, passwordHash, shippingAddress }) {
+async function findOrCreateForSignup({ name, phone, passwordHash, address, city, state, pincode }) {
   const existing = await findByPhone(phone);
   if (existing) {
     if (existing.passwordHash) {
       return { conflict: true, customer: null };
     }
     await getPool().query(
-      `UPDATE customers SET name = COALESCE(?, name), address = COALESCE(?, address), password_hash = ? WHERE id = ?`,
-      [name || null, shippingAddress || null, passwordHash, existing.id]
+      `UPDATE customers SET name = COALESCE(?, name), password_hash = ?,
+       address = COALESCE(?, address), city = COALESCE(?, city),
+       state = COALESCE(?, state), pincode = COALESCE(?, pincode) WHERE id = ?`,
+      [name || null, passwordHash, address || null, city || null, state || null, pincode || null, existing.id]
     );
     return { conflict: false, customer: await findById(existing.id) };
   }
 
   const placeholderEmail = `${phone}@customer.mayuraregalia.local`;
   const [result] = await getPool().query(
-    `INSERT INTO customers (name, email, phone, address, password_hash, status) VALUES (?, ?, ?, ?, ?, 'active')`,
-    [name, placeholderEmail, phone, shippingAddress || null, passwordHash]
+    `INSERT INTO customers (name, email, phone, address, city, state, pincode, password_hash, status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active')`,
+    [name, placeholderEmail, phone, address || null, city || null, state || null, pincode || null, passwordHash]
   );
   return { conflict: false, customer: await findById(result.insertId) };
 }

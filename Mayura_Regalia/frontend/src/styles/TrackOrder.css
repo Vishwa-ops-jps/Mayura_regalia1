@@ -1,0 +1,35 @@
+.track-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: end; margin-bottom: 18px; }
+.track-form label { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; font-weight: 600; color: #111111; }
+.track-form input { padding: 12px 14px; border: 1px solid #F3C6D6; border-radius: 8px; font-size: 1rem; font-family: inherit; background: #fff; }
+.track-form input:focus { outline: 2px solid #F4A6C0; border-color: #F4A6C0; }
+.track-btn { background: var(--brand); color: #fff; border: 0; border-radius: 8px; padding: 13px 24px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer; }
+.track-btn:disabled { opacity: 0.6; cursor: wait; }
+.track-error { background: #fdecec; color: #a12727; border: 1px solid #f3c7c7; padding: 12px 14px; border-radius: 8px; margin-bottom: 18px; }
+.track-result { background: #fff; border: 1px solid #F3C6D6; border-radius: 14px; padding: 22px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06); }
+.track-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; padding-bottom: 16px; border-bottom: 1px solid #F3C6D6; margin-bottom: 20px; }
+.track-head small { display: block; color: #111111; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.track-head strong { color: #111111; }
+.track-steps { list-style: none; margin: 0 0 20px; padding: 0; }
+.track-steps li { display: flex; gap: 14px; position: relative; padding-bottom: 22px; color: #a99d98; }
+.track-steps li:last-child { padding-bottom: 0; }
+.track-steps li:not(:last-child)::before { content: ''; position: absolute; left: 15px; top: 32px; bottom: 2px; width: 2px; background: #F3C6D6; }
+.track-steps li.done:not(:last-child)::before { background: #F4A6C0; }
+.track-dot { flex: 0 0 32px; height: 32px; border-radius: 50%; border: 2px solid #F3C6D6; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; background: #fff; }
+.track-steps li.done { color: #111111; }
+.track-steps li.done .track-dot { background: #F4A6C0; border-color: #F4A6C0; color: #111111; }
+.track-steps li.current .track-dot { background: var(--brand); border-color: var(--brand); color: #fff; box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.15); }
+.track-steps strong { display: block; }
+.track-steps small { color: #111111; }
+.track-cancelled { background: #fdf2f2; border: 1px solid #f0cccc; color: #8a2b2b; padding: 14px; border-radius: 8px; margin-bottom: 20px; line-height: 1.6; }
+.track-cancelled a, .track-help a { color: #111111; }
+.track-courier { background: #FFFFFF; border: 1px solid #F3C6D6; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 3px; margin-bottom: 20px; font-size: 0.92rem; }
+.track-courier a { color: #111111; font-weight: 600; }
+.track-items { border-top: 1px solid #F3C6D6; padding-top: 14px; }
+.track-item { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.track-item img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid #F3C6D6; }
+.track-item p { margin: 0; font-weight: 600; }
+.track-item small { color: #111111; }
+.track-total { display: flex; justify-content: space-between; border-top: 1px solid #F3C6D6; padding-top: 10px; margin-top: 6px; }
+.track-dest { display: block; margin-top: 8px; color: #111111; }
+.track-help { margin: 16px 0 0; font-size: 0.9rem; color: #111111; }
+@media (max-width: 720px) { .track-form { grid-template-columns: 1fr; } }

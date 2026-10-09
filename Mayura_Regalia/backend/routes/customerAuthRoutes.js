@@ -1,5 +1,5 @@
 const express = require('express');
-const { signup, login, me, myOrders, forgotPassword, resetPassword } = require('../controllers/customerAuthController');
+const { signup, login, me, myOrders, forgotPassword, resetPassword, cancelOrder, requestReturn } = require('../controllers/customerAuthController');
 const { requireCustomer } = require('../middleware/auth');
 
 const router = express.Router();
@@ -13,5 +13,7 @@ router.post('/reset-password', resetPassword);
 // Requires a valid customer session token.
 router.get('/me', requireCustomer, me);
 router.get('/me/orders', requireCustomer, myOrders);
+router.post('/me/orders/:id/cancel', requireCustomer, cancelOrder);
+router.post('/me/orders/:id/return', requireCustomer, requestReturn);
 
 module.exports = router;

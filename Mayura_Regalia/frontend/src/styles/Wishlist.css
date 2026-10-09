@@ -1,0 +1,87 @@
+/* Heart button */
+.wishlist-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: inherit;
+  color: #111111;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.wishlist-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  transition: fill 0.2s ease, transform 0.25s ease;
+}
+.wishlist-btn.is-saved svg { fill: #E8789F; }
+.wishlist-btn.is-saved { color: #111111; }
+
+/* On product cards: round button floating over the image */
+.wishlist-btn-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+.wishlist-btn-icon:hover { transform: scale(1.1); background: #fff; }
+.wishlist-btn-icon:active svg { transform: scale(0.85); }
+
+/* On the product page: full-width text button under Add to Cart / Buy Now */
+.wishlist-btn-full {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid #efcfd8;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+.wishlist-btn-full:hover { background: #FDE4EE; border-color: var(--brand); }
+.wishlist-btn-full.is-saved { background: #FDE4EE; border-color: var(--brand); }
+
+/* Wishlist page */
+.wishlist-page { padding: 2rem 0 3rem; }
+.wishlist-header { text-align: center; margin-bottom: 2rem; }
+.wishlist-header h1 { margin-bottom: 0.5rem; }
+.wishlist-header p { color: var(--light-text); font-size: 0.95rem; }
+.wishlist-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--light-text);
+}
+.wishlist-state p { margin-bottom: 0.5rem; font-size: 1.05rem; }
+.wishlist-state .btn { display: inline-block; margin-top: 1.25rem; text-decoration: none; }
+.wishlist-state-error { color: #a52d22; }
+
+/* Header heart link */
+.wishlist-link {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #efcfd8;
+  border-radius: 3px;
+  background: #fff;
+  color: #111111;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.wishlist-link:hover { background: #FDE4EE; transform: translateY(-1px); }
+.wishlist-link svg { width: 21px; height: 21px; fill: none; stroke: currentColor; }
+@media (max-width: 480px) {
+  .wishlist-link { width: 40px; height: 40px; }
+}

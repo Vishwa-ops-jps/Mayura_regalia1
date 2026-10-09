@@ -1,5 +1,54 @@
 const { getPool } = require('../config/db');
 
+// Default homepage hero slides (no repeated images). Admin > Settings > Hero Section
+// replaces these; they are used until the admin saves their own.
+const DEFAULT_HERO_SLIDES = [
+  {
+    "id": "bridal",
+    "badge": "BRIDAL COLLECTION",
+    "tagline": "For your most precious moments",
+    "collectionName": "BRIDAL JEWELLERY",
+    "description": "Exquisite handcrafted bridal jewellery sets for your special day",
+    "buttonText": "EXPLORE NOW",
+    "link": "/shop?category=Bridal+Jewellery",
+    "images": [
+      "/CoverImage1.png",
+      "/products/regalia-5.jpg",
+      "/products/regalia-11.jpg",
+      "/products/fashion-jewels-1.jpg"
+    ]
+  },
+  {
+    "id": "kundan",
+    "badge": "KUNDAN & TEMPLE",
+    "tagline": "Timeless beauty crafted for generations",
+    "collectionName": "JEWELLERY COLLECTIONS",
+    "description": "Intricately handcrafted gold, kundan and precious gemstone jewellery",
+    "buttonText": "EXPLORE NOW",
+    "link": "/shop",
+    "images": [
+      "/CoverImage2.jpg",
+      "/products/regalia-1.jpg",
+      "/products/regalia-9.jpg",
+      "/products/fashion-jewels-2.jpg"
+    ]
+  },
+  {
+    "id": "sarees",
+    "badge": "SAREES",
+    "tagline": "Woven poetry for celebratory grace",
+    "collectionName": "SAREES COLLECTION",
+    "description": "Traditional Kalamkari prints and rich velvet sarees",
+    "buttonText": "EXPLORE NOW",
+    "link": "/shop?category=Sarees",
+    "images": [
+      "/BlueSaree.jpeg",
+      "/products/saree-wine-velvet.jpg",
+      "/products/saree-cotton-elephant-print.jpg"
+      ]
+  }
+];
+
 const DEFAULTS = {
   storeName: 'Mayura Regalia',
   storeEmail: 'support@mayuraregalia.com',
@@ -9,6 +58,14 @@ const DEFAULTS = {
   shippingFee: '0',
   freeShippingThreshold: '999',
   taxRate: '0',
+  // Gold pricing inputs used by the admin for transparent jewellery pricing.
+  // Prices are stored per gram in the store currency.
+  goldPrice24k: '0',
+  goldPrice22k: '0',
+  goldPrice18k: '0',
+  makingChargePercent: '0',
+  wastagePercent: '0',
+  goldPriceUpdatedAt: '',
   socialInstagram: '',
   socialFacebook: '',
   maintenanceMode: 'false',
@@ -35,6 +92,14 @@ const DEFAULTS = {
   // encoded into the UPI deep link/QR that customers pay - money for that
   // path goes straight to whichever bank account this UPI ID is linked to.
   upiId: '',
+  // Hero Section (editable from Admin > Settings > Hero Section)
+  heroHeading: 'MAYURA REGALIA',
+  heroSubtitle: 'Exquisite handcrafted jewellery for your most precious moments',
+  heroImage: '/CoverImage1.png',
+  heroButtonText: 'EXPLORE COLLECTION',
+  heroButtonLink: '/shop',
+  // JSON array of slides shown on the storefront hero (see DEFAULT_HERO_SLIDES).
+  heroSlides: JSON.stringify(DEFAULT_HERO_SLIDES),
 };
 
 async function getAll() {
@@ -57,4 +122,27 @@ async function updateMany(values) {
   return getAll();
 }
 
-module.exports = { getAll, updateMany, DEFAULTS };
+// Public, secret-free read of just the hero slides for the storefront.
+async function getHero() {
+  const [rows] = await getPool().query('SELECT setting_value AS value FROM settings WHERE setting_key = ?', ['heroSlides']);
+  try {
+    const parsed = JSON.parse(rows[0] && rows[0].value);
+    if (Array.isArray(parsed) && parsed.length) return parsed;
+  } catch (e) { /* fall through to defaults */ }
+  return DEFAULT_HERO_SLIDES;
+}
+
+async function getGoldPrices() {
+  const settings = await getAll();
+  return {
+    currency: settings.currency,
+    goldPrice24k: settings.goldPrice24k,
+    goldPrice22k: settings.goldPrice22k,
+    goldPrice18k: settings.goldPrice18k,
+    makingChargePercent: settings.makingChargePercent,
+    wastagePercent: settings.wastagePercent,
+    updatedAt: settings.goldPriceUpdatedAt,
+  };
+}
+
+module.exports = { getAll, updateMany, getHero, getGoldPrices, DEFAULTS, DEFAULT_HERO_SLIDES };

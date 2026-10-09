@@ -9,12 +9,14 @@ const giftModel = require('../models/giftModel');
 async function seedAdminExtras() {
   const pool = getPool();
 
-  const [[{ count: categoryCount }]] = await pool.query('SELECT COUNT(*) AS count FROM categories');
-  if (Number(categoryCount) === 0) {
-    const [rows] = await pool.query('SELECT DISTINCT category FROM products');
-    let i = 0;
-    for (const row of rows) {
+  const [rows] = await pool.query('SELECT DISTINCT category FROM products WHERE category IS NOT NULL AND category != ""');
+  const [existingCats] = await pool.query('SELECT name FROM categories');
+  const existingSet = new Set((existingCats || []).map((c) => String(c.name || '').toLowerCase().trim()));
+  let i = (existingCats || []).length;
+  for (const row of rows) {
+    if (row.category && !existingSet.has(String(row.category).toLowerCase().trim())) {
       await categoryModel.create({ name: row.category, sortOrder: i++, status: 'active' });
+      existingSet.add(String(row.category).toLowerCase().trim());
     }
   }
 
