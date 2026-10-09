@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { settingsApi } from '../services/adminApi';
 
 const MAX_SLIDES = 6;
 const MAX_IMAGES = 4;
 const MAX_PAYLOAD = 9 * 1024 * 1024; // server accepts 10 MB per request
 
-// Returns { slides, hadLegacyPaths } - strips any image that is a plain
-// relative/absolute path (not a data: URI or http/https URL) because those
-// file-system paths don't exist on the deployed server.
+// An image is kept when it is an uploaded photo (data: URI), a web link, or a site path such as
+// /CoverImage1.png (those files live in the website's public folder and display fine). Paths that
+// do not actually load - for example an old /products/JewelsSet.jpeg - are dropped after a check.
 const isEmbeddableImage = (src) =>
-  typeof src === 'string' && (src.startsWith('data:') || /^https?:\/\//i.test(src));
+  typeof src === 'string' && (src.startsWith('data:') || /^https?:\/\//i.test(src) || src.startsWith('/'));
+
+const imageLoads = (src) => new Promise((resolve) => {
+  if (src.startsWith('data:')) return resolve(true);
+  const img = new Image();
+  img.onload = () => resolve(true);
+  img.onerror = () => resolve(false);
+  img.src = src;
+});
 
 const parseSlides = (value) => {
   try {
@@ -65,11 +73,31 @@ const miniBtn = { border: '1px solid #ccc', background: '#fff', borderRadius: 4,
 
 const HeroSlidesEditor = ({ value, onSaved }) => {
   const [slides, setSlides] = useState(() => parseSlides(value).slides);
-  const [hadLegacy] = useState(() => parseSlides(value).hadLegacyPaths);
+  const [hadLegacy, setHadLegacy] = useState(() => parseSlides(value).hadLegacyPaths);
   const [saving, setSaving] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      let removed = false;
+      const checked = await Promise.all(slides.map(async (slide) => {
+        const keep = [];
+        for (const src of slide.images || []) {
+          if (await imageLoads(src)) keep.push(src); else removed = true;
+        }
+        return { ...slide, images: keep };
+      }));
+      if (!cancelled && removed) {
+        setSlides(checked);
+        setHadLegacy(true);
+      }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const patch = (index, changes) =>
     setSlides((cur) => cur.map((s, i) => (i === index ? { ...s, ...changes } : s)));
