@@ -1,0 +1,11 @@
+{
+  "name": "mayura-regalia",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mayura Regalia E-Commerce and API",
+  "scripts": {
+    "build": "cd backend && npm install",
+    "build:full": "cd frontend && npm install && npm run build && cd ../backend && npm install",
+    "start": "cd backend && npm start"
+  }
+}
