@@ -1079,7 +1079,7 @@ const products = [
 const { getPool } = require('../config/db');
 
 async function seedProducts() {
-  const sql = INSERT INTO products
+  const sql = `INSERT INTO products
     (id, name, category, price, original_price, discount, rating, material, color, in_stock, description, image, images)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE
@@ -1094,7 +1094,7 @@ async function seedProducts() {
       in_stock = VALUES(in_stock),
       description = VALUES(description),
       image = VALUES(image),
-      images = VALUES(images);
+      images = VALUES(images)`;
 
   for (const p of products) {
     const imagesVal = p.images ? JSON.stringify(p.images) : JSON.stringify([p.image]);
