@@ -77,7 +77,7 @@ const Home = () => {
   ];
 
   const categories = [
-    { name: 'GOLD JEWELLERY', icon: '✦', link: '/shop?category=Jewels' },
+    { name: 'GOLD JEWELLERY', image: '/products/gold-jewellery.jpg', focus: '65% center', icon: '✦', link: '/shop?category=Jewels' },
     { name: 'SILVER', image: '/products/silver.jpg', icon: '◈', link: '/shop?category=Silver' },
     { name: 'GERMAN SILVER', image: '/products/german-silver.jpg', focus: 'center top', icon: '✧', link: '/shop?category=German+Silver' },
     { name: 'FASHION JEWELLERY', video: '/videos/hero-slide.mp4', link: '/shop?category=Fashion+Jewels' },
