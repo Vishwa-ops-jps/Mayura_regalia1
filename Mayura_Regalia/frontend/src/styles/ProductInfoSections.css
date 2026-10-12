@@ -1,0 +1,9 @@
+.product-info-sections { margin: 1.2rem 0; border-top: 1px solid #F3C6D6; }
+.product-info-sections details { border-bottom: 1px solid #F3C6D6; padding: 0.85rem 0; }
+.product-info-sections summary { cursor: pointer; font-weight: 600; color: #111111; list-style: none; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.02em; }
+.product-info-sections summary::-webkit-details-marker { display: none; }
+.product-info-sections summary::after { content: '+'; font-size: 1.3rem; line-height: 1; color: #111111; }
+.product-info-sections details[open] summary::after { content: '\2212'; }
+.product-info-sections ul { margin: 0.7rem 0 0; padding-left: 1.2rem; color: #111111; line-height: 1.7; font-size: 0.93rem; }
+.product-info-sections li { margin-bottom: 0.3rem; }
+.product-info-sections a { color: #111111; text-decoration: underline; }

@@ -1,0 +1,42 @@
+ .footer {
+  background: #F8C8DC;
+  color: var(--text-color);
+  margin-top: auto;
+  padding: 4rem 2rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+.footer-container {
+  max-width: 1400px; margin: 0 auto 2.5rem; display: grid;
+  grid-template-columns: 1.5fr repeat(2, 1fr); gap: 3rem;
+}
+.footer-section { padding: 0 .5rem; }
+.footer-brand { display: inline-flex; align-items: center; }
+.footer-logo { height: 110px; width: 165px; object-fit: contain; margin-bottom: .8rem; }
+.footer-section h4 {
+  color: var(--text-color); margin-bottom: 1.1rem; font-size: .9rem;
+  font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+}
+.footer-section p { color: #111111; font-size: .98rem; line-height: 1.7; max-width: 260px; }
+.footer-section ul { list-style: none; }
+.footer-section li { margin-bottom: .6rem; }
+.footer-section a { color: #111111; text-decoration: none; font-size: .96rem; transition: color .25s ease, transform .25s ease; display: inline-block; }
+.footer-section a:hover { color: var(--secondary-color); transform: translateX(3px); }
+.social-links { display: flex; gap: .6rem; flex-wrap: wrap; }
+.social-links a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 1px solid #F0D6DE; border-radius: 50%; }
+.social-links a svg { width: 18px; height: 18px; }
+.social-links a:hover { border-color: var(--primary-color); background: rgba(201,162,39,.08); transform: none; }
+.footer-bottom {
+  border-top: 1px solid #F0D6DE; padding-top: 1.25rem; text-align: center;
+  color: #111111; font-size: .84rem; max-width: 1400px; margin: 0 auto;
+}
+@media (max-width: 900px) { .footer-container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) {
+  .footer { padding: 2.5rem 1rem 1rem; }
+  .footer-container { grid-template-columns: 1fr 1fr; gap: 2rem 1rem; }
+  .footer-section:first-child { grid-column: 1 / -1; }
+  .footer-logo { height: 92px; width: 138px; }
+}
+
+.footer-legal-links { margin: 0 0 6px; font-size: 0.85rem; }
+.footer-legal-links a { color: inherit; opacity: 0.85; text-decoration: none; }
+.footer-legal-links a:hover { opacity: 1; text-decoration: underline; }

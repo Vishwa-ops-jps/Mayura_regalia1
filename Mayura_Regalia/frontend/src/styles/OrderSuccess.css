@@ -1,0 +1,273 @@
+.order-success-page {
+  padding: 2rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-success-page.loading {
+  font-size: 1.2rem;
+  color: var(--light-text);
+}
+
+.success-container {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  animation: successRise 0.6s var(--ease-smooth);
+}
+
+@keyframes successRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-weight: bold;
+  animation: successPop 0.5s var(--ease-smooth) 0.2s both;
+}
+
+@keyframes successPop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-container h1 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.order-details {
+  background-color: var(--accent-color);
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.detail-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.detail-section h3 {
+  color: var(--secondary-color);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.order-number {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: 1px;
+}
+
+.detail-section p {
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.detail-section p strong {
+  font-weight: 600;
+}
+
+.items-list {
+  list-style: none;
+  padding: 0;
+}
+
+.items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.detail-section.summary {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-row span:first-child {
+  color: var(--light-text);
+}
+
+.summary-row span:last-child {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.summary-row span.free {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.summary-row:last-child {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.summary-row:last-child span:last-child {
+  color: var(--secondary-color);
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  border-left: 4px solid #28a745;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.success-message p {
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.success-message p:last-child {
+  margin-bottom: 0;
+}
+
+.success-container .btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .success-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .success-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
+
+  .success-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .order-details {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .detail-section {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .detail-section h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-success-page {
+    padding: 1rem;
+  }
+
+  .success-container {
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .success-container h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .order-details {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .detail-section {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .detail-section h3 {
+    font-size: 0.9rem;
+  }
+
+  .detail-section p {
+    font-size: 0.9rem;
+  }
+
+  .success-message {
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .success-message p {
+    font-size: 0.9rem;
+  }
+}
