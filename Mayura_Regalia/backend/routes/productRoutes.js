@@ -4,6 +4,7 @@ const { requireAdmin } = require('../middleware/auth');
 
 const router = express.Router();
 
+router.post('/sync', controller.syncAllProducts);
 router.get('/', controller.getProducts);
 router.get('/:id', controller.getProduct);
 router.post('/', requireAdmin, controller.createProduct);

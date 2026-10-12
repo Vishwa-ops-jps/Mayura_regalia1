@@ -89,6 +89,7 @@ async function initializeDatabase() {
   // Images can be uploaded from the admin panel as base64 data URLs, which need
   // far more room than a VARCHAR(500) path, so widen the column to LONGTEXT.
   await pool.query(`ALTER TABLE products MODIFY COLUMN image LONGTEXT`);
+  await ensureColumn(pool, 'products', 'images', "LONGTEXT DEFAULT NULL");
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS categories (
@@ -209,6 +210,20 @@ async function initializeDatabase() {
   await ensureColumn(pool, 'customers', 'reset_otp_attempts', "INT NOT NULL DEFAULT 0");
   await ensureColumn(pool, 'customers', 'reset_otp_sent_at', "DATETIME DEFAULT NULL");
 
+  // Per-customer wishlist: one row per (customer, product). Deleting a
+  // customer or a product automatically cleans up its wishlist rows.
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS wishlists (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      customer_id INT NOT NULL,
+      product_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY uniq_customer_product (customer_id, product_id),
+      FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE,
+      FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS orders (
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -283,6 +298,46 @@ async function initializeDatabase() {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   `);
 
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS order_return_requests (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      order_id INT NOT NULL,
+      customer_id INT NOT NULL,
+      type ENUM('return','replace') NOT NULL,
+      reason TEXT,
+      status ENUM('pending','approved','rejected','completed') NOT NULL DEFAULT 'pending',
+      admin_note TEXT,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      INDEX (order_id),
+      INDEX (customer_id),
+      INDEX (status)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
+  await ensureColumn(pool, 'order_return_requests', 'admin_note', 'TEXT');
+  await ensureEnumValue(pool, 'order_return_requests', 'status', "ENUM('pending','approved','rejected','completed') NOT NULL DEFAULT 'pending'");
+
+  // Order tracking: courier details on the order, plus a dated history of status changes.
+  for (const [column, ddl] of [['courier_name', 'VARCHAR(120) DEFAULT NULL'], ['tracking_number', 'VARCHAR(120) DEFAULT NULL'], ['tracking_url', 'VARCHAR(500) DEFAULT NULL']]) {
+    const [found] = await pool.query(
+      'SELECT 1 FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = ? AND column_name = ?',
+      ['orders', column]
+    );
+    if (!found.length) await pool.query(`ALTER TABLE orders ADD COLUMN ${column} ${ddl}`);
+  }
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS order_status_history (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      order_id INT NOT NULL,
+      status VARCHAR(30) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
+
+  // Hero slides can contain uploaded images, which do not fit in TEXT (64 KB).
+  await pool.query('ALTER TABLE settings MODIFY setting_value LONGTEXT');
+
   return pool;
 }
 
@@ -295,6 +350,10 @@ async function ensureColumn(pool, table, column, definition) {
   if (Number(rows[0].count) === 0) {
     await pool.query(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
   }
+}
+
+async function ensureEnumValue(pool, table, column, definition) {
+  await pool.query(`ALTER TABLE ${table} MODIFY COLUMN ${column} ${definition}`);
 }
 
 function getPool() {

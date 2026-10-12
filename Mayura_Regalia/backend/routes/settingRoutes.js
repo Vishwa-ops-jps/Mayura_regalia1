@@ -6,6 +6,10 @@ const router = express.Router();
 // secret, the storefront API secret key), so it must never be public. The
 // storefront itself doesn't call this endpoint - it uses
 // GET /api/payments/config for the handful of payment flags it needs.
+// Public: only the hero slides (no secrets) so the storefront can render them.
+router.get('/hero', controller.getHero);
+router.post('/hero/reset', requireAdmin, controller.resetHeroSlides);
+router.get('/gold-prices', controller.getGoldPrices);
 router.get('/', requireAdmin, controller.getSettings);
 router.put('/', requireAdmin, controller.updateSettings);
 module.exports = router;

@@ -52,7 +52,7 @@ try {
   console.warn('express-rate-limit not installed - run "npm install" in backend for login rate limiting');
 }
 
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+app.use(cors());
 // Raised from Express's 100kb default: images (product photos, payment
 // screenshots) are uploaded as base64 data URLs in the JSON body.
 app.use(express.json({ limit: '10mb' }));

@@ -1,7 +1,7 @@
 const { getPool } = require('../config/db');
 
 // Builds the last N calendar days (oldest first) as 'YYYY-MM-DD' strings,
-// e.g. for a "last 7 days" chart - so the chart always has 7 slots even on
+// so the chart always has a fixed number of slots even on
 // days with zero orders, instead of stretching 1-2 bars across the whole width.
 function buildDailyRange(days) {
   const range = [];
@@ -79,10 +79,10 @@ async function getDashboardSummary() {
 
   const [revenueTrendRows] = await pool.query(
     `SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS date, COALESCE(SUM(total),0) AS revenue, COUNT(*) AS orders
-     FROM orders WHERE created_at >= (CURDATE() - INTERVAL 6 DAY)
+     FROM orders WHERE created_at >= (CURDATE() - INTERVAL 29 DAY)
      GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d') ORDER BY date ASC`
   );
-  const revenueTrend = fillRange(buildDailyRange(7), revenueTrendRows, 'date');
+  const revenueTrend = fillRange(buildDailyRange(30), revenueTrendRows, 'date');
 
   // Category-wise sales split, for the dashboard pie/donut chart.
   const [categoryBreakdown] = await pool.query(
@@ -126,16 +126,20 @@ async function getDashboardSummary() {
 
 async function getSalesReport({ days = 30 } = {}) {
   const pool = getPool();
-  const [salesByDay] = await pool.query(
-    `SELECT DATE(created_at) AS date, COALESCE(SUM(total),0) AS revenue, COUNT(*) AS orders
+  const [salesByDayRows] = await pool.query(
+    `SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS date, COALESCE(SUM(total),0) AS revenue, COUNT(*) AS orders
      FROM orders WHERE created_at >= (CURDATE() - INTERVAL ? DAY)
-     GROUP BY DATE(created_at) ORDER BY date ASC`,
+     GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d') ORDER BY date ASC`,
     [Number(days)]
   );
   const [salesByCategory] = await pool.query(
     `SELECT p.category AS category, COALESCE(SUM(oi.subtotal),0) AS revenue, SUM(oi.quantity) AS units
-     FROM order_items oi LEFT JOIN products p ON p.id = oi.product_id
+     FROM order_items oi
+     LEFT JOIN products p ON p.id = oi.product_id
+     INNER JOIN orders o ON o.id = oi.order_id
+     WHERE o.created_at >= (CURDATE() - INTERVAL ? DAY)
      GROUP BY p.category ORDER BY revenue DESC`
+    , [Number(days)]
   );
   const [statusBreakdown] = await pool.query(
     `SELECT order_status AS status, COUNT(*) AS count FROM orders GROUP BY order_status`
@@ -144,7 +148,7 @@ async function getSalesReport({ days = 30 } = {}) {
     `SELECT method, COUNT(*) AS count, COALESCE(SUM(amount),0) AS total FROM payments GROUP BY method`
   );
   return {
-    salesByDay: salesByDay.map((r) => ({ ...r, revenue: Number(r.revenue), orders: Number(r.orders) })),
+    salesByDay: fillRange(buildDailyRange(Number(days)), salesByDayRows, 'date'),
     salesByCategory: salesByCategory.map((r) => ({ category: r.category || 'Uncategorised', revenue: Number(r.revenue), units: Number(r.units || 0) })),
     statusBreakdown: statusBreakdown.map((r) => ({ ...r, count: Number(r.count) })),
     paymentBreakdown: paymentBreakdown.map((r) => ({ ...r, count: Number(r.count), total: Number(r.total) })),

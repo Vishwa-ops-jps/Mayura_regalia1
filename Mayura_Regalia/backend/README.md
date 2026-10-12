@@ -63,6 +63,13 @@ Authorization: Bearer <token>
 
 Product create/update/delete operations are persisted directly in MySQL.
 
+## Gold pricing
+
+Admin Settings includes current 24K, 22K and 18K gold prices per gram, plus
+making-charge and wastage percentages. The public `GET /api/settings/gold-prices`
+endpoint exposes only these pricing values and the store currency for storefront
+pricing displays; it does not expose admin or payment secrets.
+
 ## Payment gateway (Razorpay)
 
 Online payments (debit/credit cards, UPI, netbanking, wallets) go through Razorpay.

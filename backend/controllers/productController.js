@@ -64,4 +64,16 @@ async function deleteProduct(req, res) {
   }
 }
 
-module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct };
+async function syncAllProducts(req, res) {
+  try {
+    const { seedProducts } = require('../utils/seedProducts');
+    await seedProducts();
+    const all = await productModel.findAll({});
+    res.json({ message: 'All products synced successfully', count: all.length });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to sync products: ' + error.message });
+  }
+}
+
+module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct, syncAllProducts };

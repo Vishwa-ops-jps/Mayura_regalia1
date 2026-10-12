@@ -1,5 +1,6 @@
 const model = require('../models/orderModel');
 const productModel = require('../models/productModel');
+const { sendOrderEmail } = require('../utils/orderEmails');
 
 async function listOrders(req, res) {
   try {
@@ -61,6 +62,7 @@ async function createOrder(req, res) {
       } catch { /* ignore stock sync errors */ }
     }
 
+    sendOrderEmail('placed', order); // best-effort, never blocks or fails the order
     res.status(201).json(order);
   } catch (error) {
     console.error(error);
@@ -70,12 +72,31 @@ async function createOrder(req, res) {
 
 async function updateOrderStatus(req, res) {
   try {
+    const before = await model.findById(req.params.id);
+    if (!before) return res.status(404).json({ message: 'Order not found' });
     const order = await model.updateStatus(req.params.id, req.body);
-    if (!order) return res.status(404).json({ message: 'Order not found' });
+    // Email the customer when the order status actually changes (not for payment/tracking edits).
+    const newStatus = req.body && req.body.orderStatus;
+    if (newStatus && newStatus !== before.orderStatus && ['processing', 'shipped', 'delivered', 'cancelled'].includes(newStatus)) {
+      sendOrderEmail(newStatus, order);
+    }
     res.json(order);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to update order' });
+  }
+}
+
+// Public: customer enters order number + the email/phone used at checkout.
+async function trackOrder(req, res) {
+  try {
+    const { orderNumber, contact } = req.body || {};
+    const result = await model.findForTracking(orderNumber, contact);
+    if (!result) return res.status(404).json({ message: 'We could not find an order matching those details. Please check the order number and the email or phone used at checkout.' });
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Could not look up your order right now' });
   }
 }
 
@@ -90,4 +111,4 @@ async function deleteOrder(req, res) {
   }
 }
 
-module.exports = { listOrders, getOrder, getOrderByNumber, createOrder, updateOrderStatus, deleteOrder };
+module.exports = { listOrders, getOrder, getOrderByNumber, trackOrder, createOrder, updateOrderStatus, deleteOrder };

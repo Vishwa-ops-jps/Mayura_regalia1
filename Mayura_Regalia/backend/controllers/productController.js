@@ -2,7 +2,7 @@ const productModel = require('../models/productModel');
 
 async function getProducts(req, res) {
   try {
-    const products = await productModel.findAll({ category: req.query.category, search: req.query.search });
+    const products = await productModel.findAll({ category: req.query.category, material: req.query.material, search: req.query.search });
     res.json(products);
   } catch (error) {
     console.error(error);
@@ -64,4 +64,16 @@ async function deleteProduct(req, res) {
   }
 }
 
-module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct };
+async function syncAllProducts(req, res) {
+  try {
+    const { seedProducts } = require('../utils/seedProducts');
+    await seedProducts();
+    const all = await productModel.findAll({});
+    res.json({ message: 'All products synced successfully', count: all.length });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to sync products: ' + error.message });
+  }
+}
+
+module.exports = { getProducts, getProduct, createProduct, updateProduct, deleteProduct, syncAllProducts };
