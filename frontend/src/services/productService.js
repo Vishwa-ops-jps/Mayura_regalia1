@@ -99,7 +99,7 @@ const productService = {
             ],
           },
           { id: 'sarees', name: 'SAREES', slug: 'sarees', subcategories: [] },
-          { id: 'bags', name: 'BAGS', slug: 'bags', materials: [], subcategories: [] },
+          { id: 'bags', name: 'HAND BAGS', slug: 'bags', materials: [], subcategories: [] },
           { id: 'watches', name: 'WATCHES', slug: 'watches', subcategories: [] },
           { id: 'gifts', name: 'GIFTS', slug: 'gifts', subcategories: [] },
         ],

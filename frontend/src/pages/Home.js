@@ -70,9 +70,9 @@ const Home = () => {
     {
       video: '/videos/bags.mp4',
       eyebrow: 'CARRY IT WELL',
-      title: 'Bags',
+      title: 'Hand Bags',
       link: '/shop?category=Bags',
-      chipText: 'Statement Bags',
+      chipText: 'Statement Hand Bags',
     },
   ];
 
@@ -82,7 +82,7 @@ const Home = () => {
     { name: 'GERMAN SILVER', icon: '✧', link: '/shop?category=German+Silver' },
     { name: 'FASHION JEWELLERY', video: '/videos/hero-slide.mp4', link: '/shop?category=Fashion+Jewels' },
     { name: 'SAREES', video: '/videos/sarees.mp4', icon: '❖', link: '/shop?category=Sarees' },
-    { name: 'BAGS', video: '/videos/bags.mp4', link: '/shop?category=Bags' },
+    { name: 'HAND BAGS', video: '/videos/bags.mp4', link: '/shop?category=Bags' },
     { name: 'WATCHES', icon: '◷', link: '/shop?category=Watches' },
     { name: 'GIFTS', icon: '♡', link: '/shop?category=Gifts' },
   ];

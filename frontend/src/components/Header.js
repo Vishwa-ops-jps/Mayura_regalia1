@@ -161,7 +161,7 @@ const Header = () => {
       </div>
 
       <div className="mega-section">
-        <Link className="mega-heading" to="/shop?category=Bags" onClick={close}>BAGS</Link>
+        <Link className="mega-heading" to="/shop?category=Bags" onClick={close}>HAND BAGS</Link>
         {bagMaterials.length > 0 && (
           <>
             <span className="mega-label">SHOP BY MATERIAL</span>
