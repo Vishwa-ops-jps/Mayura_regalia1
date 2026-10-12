@@ -4,17 +4,33 @@ const path = require('path');
 
 require('dotenv').config();
 
-const caPath =
-  process.env.DB_SSL_CA_PATH ||
-  path.join(__dirname, '..', 'certs', 'Aiven.pem');
+const defaultCaPath = path.join(__dirname, '..', 'certs', 'Aiven.pem');
 
-const sslConfig =
-  process.env.DB_SSL === 'true'
-    ? {
-        ca: fs.readFileSync(caPath),
-        rejectUnauthorized: true,
-      }
-    : undefined;
+function loadCa() {
+  if (process.env.DB_SSL_CA) {
+    // Allow PEM pasted into a single-line env var with literal "\n" sequences.
+    return process.env.DB_SSL_CA.replace(/\\n/g, '\n');
+  }
+
+  const caPath = process.env.DB_SSL_CA_PATH || defaultCaPath;
+  if (process.env.DB_SSL_CA_PATH || fs.existsSync(defaultCaPath)) {
+    return fs.readFileSync(caPath);
+  }
+
+  console.error(
+    'DB_SSL=true but no CA certificate found. Set DB_SSL_CA (PEM contents) or DB_SSL_CA_PATH.'
+  );
+  return undefined;
+}
+
+let sslConfig;
+if (process.env.DB_SSL === 'true') {
+  const ca = loadCa();
+  sslConfig = {
+    ...(ca !== undefined ? { ca } : {}),
+    rejectUnauthorized: true,
+  };
+}
 
 const baseConfig = {
   host: process.env.DB_HOST,
