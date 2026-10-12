@@ -78,3 +78,7 @@
 - Why Gold Bangles (and Gold Rings/Bracelets/Chains/Pendants) were empty from the header: the menu links open categories literally named "Gold Bangles" etc., but products are filed as Bangles, Rings, Bracelets, Necklaces, so the exact category match found nothing.
 - Fix in backend/models/productModel.js: Gold menu entries show the gold products (name, material or description mentions gold) of the matching plain category; any other menu link with no exact match falls back to the same word-based match search uses. frontend/src/pages/Shop.js no longer discards the server's list with its exact-match filter.
 - Restart the backend after replacing the files.
+
+## Step 19 (hero size + slideshow, hero editor keeps default photos)
+- Storefront hero was very tall (each photo row ~650 px) and had no visible controls. Re-applied the slideshow version: fixed banner height, prev/next arrows, clickable dots, swipe on phones, auto-advance every 5.5 s even with the mouse over it (frontend/src/components/HeroSection.js, styles/HeroSection.css).
+- Admin > Hero Section: the editor was removing every image whose address starts with "/" (such as /CoverImage1.png) and showing a "re-upload" warning, although those files exist in the site's public folder and display on the homepage. It now keeps them and only drops images that really fail to load (HeroSlidesEditor.js). The "Reset to defaults" button stays.

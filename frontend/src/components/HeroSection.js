@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiRequest } from '../services/api';
 import '../styles/HeroSection.css';
@@ -56,8 +56,8 @@ const BRAND_NAME = 'MAYURA REGALIA';
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [slides, setSlides] = useState(FALLBACK_SLIDES);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     let active = true;
@@ -72,22 +72,42 @@ const HeroSection = () => {
     return () => { active = false; };
   }, []);
 
+  const go = useCallback((next) => {
+    setCurrent((prev) => (next + slides.length) % slides.length);
+  }, [slides.length]);
+
+  // Auto-advance every 5.5 s. The timer restarts after any manual change (arrows, dots, swipe),
+  // so the slideshow keeps running even while the visitor's mouse is over it.
   useEffect(() => {
-    if (isPaused) return undefined;
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5500);
-    return () => clearInterval(interval);
-  }, [isPaused, slides.length]);
+    if (slides.length < 2) return undefined;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = setInterval(() => setCurrent((prev) => (prev + 1) % slides.length), 5500);
+    return () => clearInterval(timer);
+  }, [slides.length, current]);
+
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) > 50) go(current + (dx < 0 ? 1 : -1));
+  };
 
   return (
     <section
       className="hero-section"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       aria-label="Featured Collections Banner"
+      aria-roledescription="carousel"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <div className="hero-slider-wrap">
+        {slides.length > 1 && (
+          <>
+            <button type="button" className="hero-arrow hero-arrow-prev" onClick={() => go(current - 1)} aria-label="Previous slide">&#10094;</button>
+            <button type="button" className="hero-arrow hero-arrow-next" onClick={() => go(current + 1)} aria-label="Next slide">&#10095;</button>
+          </>
+        )}
         {slides.map((slide, index) => {
           const isActive = index === current;
           return (
@@ -137,19 +157,21 @@ const HeroSection = () => {
       </div>
 
       {/* Carousel indicators */}
+      {slides.length > 1 && (
       <div className="hero-diamond-dots" role="tablist" aria-label="Hero slide navigation">
         {slides.map((slide, index) => (
           <button
             key={slide.id}
             type="button"
             className={`diamond-dot ${index === current ? 'active' : ''}`}
-            onClick={() => setCurrent(index)}
+            onClick={() => go(index)}
             aria-label={`Go to slide ${index + 1}: ${slide.collectionName}`}
             role="tab"
             aria-selected={index === current}
           />
         ))}
       </div>
+      )}
     </section>
   );
 };
